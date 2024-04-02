@@ -20,6 +20,9 @@ https://leetcode.com/problems/single-number/description/?envType=study-plan-v2&e
 
 */
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class SimpleNumbers {
     public static void main(String[] args) {
         int[] nums = {1};
@@ -30,19 +33,15 @@ public class SimpleNumbers {
     }
 
     public static int singleNumber(int[] nums) {
-        int response = -1;
+        Set<Integer> response = new HashSet<>();
         for (int num : nums) {
-            int totalRepetitions = 0;
-            for (int otherNum : nums) {
-                if (otherNum == num) {
-                    totalRepetitions++;
-                }
+            if (response.contains(num)) {
+                response.remove(num);
+                continue;
             }
-            if (totalRepetitions == 1) {
-                response = num;
-                break;
-            }
+            response.add(num);
         }
-        return response;
+
+        return response.stream().findAny().get();
     }
 }
