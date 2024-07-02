@@ -12,7 +12,7 @@ class CarFleetTest {
 
     @ParameterizedTest
     @MethodSource(value = "provideTestCases")
-    void testDailyTemperatures(int target, int[] positions, int[] speeds, int expectedAnswer) {
+    void givenTestCases_provideExpectedAnswers(int target, int[] positions, int[] speeds, int expectedAnswer) {
         int answer = CarFleet.carFleet(target, positions, speeds);
         assertEquals(expectedAnswer, answer);
     }
