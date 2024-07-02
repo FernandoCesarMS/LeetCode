@@ -30,33 +30,19 @@ public class SearchA2DMatrix {
         int actualNumber = matrix[0][0];
         int rowActual = 0;
         int columnActual = 0;
-        int rowTotal = matrix.length;
-        int columnTotal = matrix[0].length;
 
         while (actualNumber < target) {
-            int numberBellow = MINIMAL_VALUE;
-            int numberRigth = MINIMAL_VALUE;
-            if (rowActual + 1 < rowTotal) {
-                numberBellow = matrix[rowActual + 1][columnActual];
-            }
-            if (columnActual + 1 < columnTotal) {
-                numberRigth = matrix[rowActual][columnActual + 1];
+            int numberBellow = hasElementInBellow(matrix, rowActual) ? matrix[rowActual + 1][columnActual] : MINIMAL_VALUE;
+            int numberRight = hasElementInRight(matrix, columnActual) ? matrix[rowActual][columnActual + 1] : MINIMAL_VALUE;
+
+            if (numberBellow == MINIMAL_VALUE && numberRight == MINIMAL_VALUE) {
+                break;
             }
 
-            if (target == numberBellow || target == numberRigth) {
-                return true;
-            }
-            if ((numberBellow > target && numberRigth > target) || (numberBellow == MINIMAL_VALUE && numberRigth == MINIMAL_VALUE)) {
-                return false;
-            }
-            if (numberBellow < target && numberRigth < target) {
-                actualNumber = Integer.max(numberBellow, numberRigth);
+            if (numberBellow <= target && numberRight <= target || numberBellow == MINIMAL_VALUE || numberRight == MINIMAL_VALUE) {
+                actualNumber = Integer.max(numberBellow, numberRight);
             } else {
-                if (numberBellow == MINIMAL_VALUE || numberRigth == MINIMAL_VALUE) {
-                    actualNumber = Integer.max(numberBellow, numberRigth);
-                } else {
-                    actualNumber = Integer.min(numberBellow, numberRigth);
-                }
+                actualNumber = Integer.min(numberBellow, numberRight);
             }
 
             if (actualNumber == numberBellow) {
@@ -66,5 +52,13 @@ public class SearchA2DMatrix {
             }
         }
         return actualNumber == target;
+    }
+
+    private static boolean hasElementInRight(int[][] matrix, int columnActual) {
+        return columnActual + 1 < matrix[0].length;
+    }
+
+    private static boolean hasElementInBellow(int[][] matrix, int rowActual) {
+        return rowActual + 1 < matrix.length;
     }
 }

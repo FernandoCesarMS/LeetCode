@@ -16,9 +16,9 @@ class SearchA2DMatrixTest {
         boolean answer = SearchA2DMatrix.searchMatrix(input, target);
         assertEquals(expectedAnswer, answer);
     }
-
     private static Stream<Arguments> provideTestCases() {
         return Stream.of(
+                Arguments.of(new int[][] {{ 1,3,5,7 },{ 10,11,16,20 }, {23,30,34,50}}, 10, true),
                 Arguments.of(new int[][] {{ -10, -10 },{ -9, -8 }}, 1, false),
                 Arguments.of(new int[][] {{ 1, 3 }}, 2, false),
                 Arguments.of(new int[][] {{ 1 }}, 2, false),
