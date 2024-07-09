@@ -27,7 +27,6 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/?envTyp
 */
 
 public class FindInRotatedSortedArray {
-//                Arguments.of(new int[]{4,5,6,7,0,1,2}, 0, 4),
 
     public static int search(int[] nums, int target) {
         int length = nums.length;
